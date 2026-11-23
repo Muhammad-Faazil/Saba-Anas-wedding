@@ -98,6 +98,21 @@ export default function InvitationMain() {
   const { couple, dates, theme, event, features, footer } = invitationConfig;
   const { colors, media } = theme;
 
+  // Parent details formatted cleanly into relation and parents' names
+  const brideRelation =
+    couple.brideRelation ||
+    (couple.brideParents.match(/^Daughter of/i) ? "Daughter of" : "");
+  const brideParentsNames =
+    couple.brideParentsNames ||
+    couple.brideParents.replace(/^Daughter of\s*/i, "").trim();
+
+  const groomRelation =
+    couple.groomRelation ||
+    (couple.groomParents.match(/^Son of/i) ? "Son of" : "");
+  const groomParentsNames =
+    couple.groomParentsNames ||
+    couple.groomParents.replace(/^Son of\s*/i, "").trim();
+
   // Calendar Helpers
   const getGoogleCalendarUrl = () => {
     const title = encodeURIComponent(
@@ -212,11 +227,13 @@ export default function InvitationMain() {
             maxWidth: 520,
             width: "100%",
             padding:
-              "clamp(56px,12vw,96px) clamp(28px,8vw,64px) clamp(48px,10vw,80px)",
+              "clamp(60px,13vw,100px) clamp(34px,9vw,68px) clamp(48px,10vw,80px)",
             textAlign: "center",
             position: "relative",
             zIndex: 1,
+            boxSizing: "border-box",
           }}
+          className="px-8 sm:px-10"
         >
           {/* Bismillah Arabic Calligraphy */}
           {couple.bismillahArabic && (
@@ -243,12 +260,13 @@ export default function InvitationMain() {
             <p
               style={{
                 fontFamily: "'Cinzel', sans-serif",
-                fontSize: "clamp(10px, 2.8vw, 13px)",
-                letterSpacing: ".32em",
+                fontSize: "clamp(9px, 2.4vw, 11.5px)",
+                letterSpacing: ".24em",
                 textTransform: "uppercase",
                 color: colors.primaryDark,
                 fontWeight: 700,
-                margin: "0 0 18px",
+                margin: "0 auto 16px",
+                maxWidth: 260,
               }}
             >
               {couple.openingGreeting}
@@ -257,7 +275,7 @@ export default function InvitationMain() {
 
           <FloralDivider
             inView={sec1.inView}
-            style={{ maxWidth: 220, margin: "0 auto 20px" }}
+            style={{ maxWidth: 160, margin: "0 auto 16px" }}
           />
 
           {/* Invitation Intro Message */}
@@ -267,14 +285,15 @@ export default function InvitationMain() {
                 fontFamily: "'Noto Serif', Georgia, serif",
                 fontStyle: "italic",
                 fontWeight: 400,
-                fontSize: "clamp(12px, 3.2vw, 14.5px)",
+                fontSize: "clamp(11px, 2.7vw, 13px)",
                 color: colors.textDark,
-                opacity: 0.78,
-                lineHeight: 1.9,
-                margin: "0 auto 28px",
-                width: "92%",
+                opacity: 0.85,
+                lineHeight: 1.8,
+                margin: "0 auto 18px",
+                maxWidth: 245,
                 textAlign: "center",
               }}
+              className="max-w-[245px] mx-auto leading-relaxed"
             >
               {couple.invitationIntroText}
             </p>
@@ -282,11 +301,11 @@ export default function InvitationMain() {
 
           <FloralDivider
             inView={sec1.inView}
-            style={{ maxWidth: 260, margin: "0 auto 24px" }}
+            style={{ maxWidth: 170, margin: "0 auto 20px" }}
           />
 
           {/* Bride Name & Parents */}
-          <div style={{ marginBottom: 20 }}>
+          <div style={{ marginBottom: 4 }}>
             <RevealY inView={sec1.inView} delay={0.28}>
               <h1
                 style={{
@@ -294,9 +313,9 @@ export default function InvitationMain() {
                     "'Cormorant Garamond', 'Noto Serif', Georgia, serif",
                   fontStyle: "italic",
                   fontWeight: 500,
-                  fontSize: "clamp(26px, 7vw, 44px)",
+                  fontSize: "clamp(28px, 7.8vw, 46px)",
                   color: colors.textDark,
-                  lineHeight: 1.2,
+                  lineHeight: 1.15,
                   margin: "0 0 6px",
                   wordBreak: "break-word",
                 }}
@@ -305,23 +324,45 @@ export default function InvitationMain() {
               </h1>
             </RevealY>
             <FadeIn inView={sec1.inView} delay={0.34}>
-              <p
-                style={{
-                  fontFamily: "'Noto Serif', Georgia, serif",
-                  fontSize: "clamp(11px, 2.8vw, 13px)",
-                  fontWeight: 500,
-                  color: colors.primaryDark,
-                  opacity: 0.75,
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}
-              >
-                {couple.brideParents}
-              </p>
+              <div style={{ textAlign: "center" }}>
+                {brideRelation && (
+                  <p
+                    style={{
+                      fontFamily: "'Cinzel', sans-serif",
+                      fontSize: "clamp(8.5px, 2.3vw, 10.5px)",
+                      letterSpacing: ".22em",
+                      textTransform: "uppercase",
+                      fontStyle: "italic",
+                      color: colors.primaryDark,
+                      opacity: 0.72,
+                      margin: "0 0 3px",
+                      fontWeight: 600,
+                    }}
+                  >
+                    {brideRelation}
+                  </p>
+                )}
+                <p
+                  style={{
+                    fontFamily: "'Noto Serif', Georgia, serif",
+                    fontSize: "clamp(11.5px, 2.8vw, 13.5px)",
+                    fontWeight: 500,
+                    color: colors.primaryDark,
+                    opacity: 0.88,
+                    lineHeight: 1.6,
+                    maxWidth: 240,
+                    margin: "0 auto",
+                    textAlign: "center",
+                  }}
+                  className="max-w-[240px] mx-auto leading-relaxed"
+                >
+                  {brideParentsNames}
+                </p>
+              </div>
             </FadeIn>
           </div>
 
-          {/* & Divider */}
+          {/* & Divider with generous breathing room */}
           <FadeIn inView={sec1.inView} delay={0.38}>
             <div
               style={{
@@ -329,12 +370,13 @@ export default function InvitationMain() {
                 alignItems: "center",
                 gap: 16,
                 justifyContent: "center",
-                margin: "14px 0",
+                margin: "24px 0",
               }}
+              className="my-6"
             >
               <div
                 style={{
-                  width: 32,
+                  width: 36,
                   height: 1,
                   background: `${colors.gold}99`,
                 }}
@@ -354,7 +396,7 @@ export default function InvitationMain() {
               </span>
               <div
                 style={{
-                  width: 32,
+                  width: 36,
                   height: 1,
                   background: `${colors.gold}99`,
                 }}
@@ -363,7 +405,7 @@ export default function InvitationMain() {
           </FadeIn>
 
           {/* Groom Name & Parents */}
-          <div style={{ marginTop: 10 }}>
+          <div style={{ marginTop: 4 }}>
             <RevealY inView={sec1.inView} delay={0.42}>
               <h1
                 style={{
@@ -371,9 +413,9 @@ export default function InvitationMain() {
                     "'Cormorant Garamond', 'Noto Serif', Georgia, serif",
                   fontStyle: "italic",
                   fontWeight: 500,
-                  fontSize: "clamp(26px, 7vw, 44px)",
+                  fontSize: "clamp(28px, 7.8vw, 46px)",
                   color: colors.textDark,
-                  lineHeight: 1.2,
+                  lineHeight: 1.15,
                   margin: "0 0 6px",
                   wordBreak: "break-word",
                 }}
@@ -382,19 +424,41 @@ export default function InvitationMain() {
               </h1>
             </RevealY>
             <FadeIn inView={sec1.inView} delay={0.48}>
-              <p
-                style={{
-                  fontFamily: "'Noto Serif', Georgia, serif",
-                  fontSize: "clamp(11px, 2.8vw, 13px)",
-                  fontWeight: 500,
-                  color: colors.primaryDark,
-                  opacity: 0.75,
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}
-              >
-                {couple.groomParents}
-              </p>
+              <div style={{ textAlign: "center" }}>
+                {groomRelation && (
+                  <p
+                    style={{
+                      fontFamily: "'Cinzel', sans-serif",
+                      fontSize: "clamp(8.5px, 2.3vw, 10.5px)",
+                      letterSpacing: ".22em",
+                      textTransform: "uppercase",
+                      fontStyle: "italic",
+                      color: colors.primaryDark,
+                      opacity: 0.72,
+                      margin: "0 0 3px",
+                      fontWeight: 600,
+                    }}
+                  >
+                    {groomRelation}
+                  </p>
+                )}
+                <p
+                  style={{
+                    fontFamily: "'Noto Serif', Georgia, serif",
+                    fontSize: "clamp(11.5px, 2.8vw, 13.5px)",
+                    fontWeight: 500,
+                    color: colors.primaryDark,
+                    opacity: 0.88,
+                    lineHeight: 1.6,
+                    maxWidth: 240,
+                    margin: "0 auto",
+                    textAlign: "center",
+                  }}
+                  className="max-w-[240px] mx-auto leading-relaxed"
+                >
+                  {groomParentsNames}
+                </p>
+              </div>
             </FadeIn>
           </div>
         </div>

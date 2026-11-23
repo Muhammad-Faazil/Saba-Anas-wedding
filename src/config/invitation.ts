@@ -31,7 +31,11 @@ export interface InvitationConfig {
     openingGreeting: string; // e.g. "WITH THE BLESSINGS OF ALLAH"
     bismillahArabic?: string; // Optional Arabic calligraphy
     invitationIntroText: string;
+    brideRelation?: string; // e.g. "Daughter of"
+    brideParentsNames?: string; // e.g. "Mr. Mohammed Hanif & Mrs. Shaheena Hanif"
     brideParents: string;
+    groomRelation?: string; // e.g. "Son of"
+    groomParentsNames?: string; // e.g. "the late Mr. Anis Khan & the late Mrs. Farida Khan"
     groomParents: string;
   };
   dates: {
@@ -96,7 +100,11 @@ export const invitationConfig: InvitationConfig = {
     bismillahArabic: "بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ",
     invitationIntroText:
       "Together with our families, we invite you to share in the joy of a beautiful new beginning and make the occasion all the more special with your presence at the wedding of",
+    brideRelation: "Daughter of",
+    brideParentsNames: "Mr. Mohammed Hanif & Mrs. Shaheena Hanif",
     brideParents: "Daughter of Mr. Mohammed Hanif & Mrs. Shaheena Hanif",
+    groomRelation: "Son of",
+    groomParentsNames: "the late Mr. Anis Khan & the late Mrs. Farida Khan",
     groomParents: "Son of the late Mr. Anis Khan & the late Mrs. Farida Khan",
   },
 
@@ -151,7 +159,7 @@ export const invitationConfig: InvitationConfig = {
       coverBackground: "/images/crimson-scroll-bg.webp",
       heroBackground: "/images/ninal-frame-bg.jpg",
       cardsBackground: "/images/crimson-bg.jpg",
-      backgroundMusicUrl: "/audio/music.mp3",
+      backgroundMusicUrl: "/audio/saba.mp3",
       autoPlayOnOpen: true,
     },
   },
